@@ -1,0 +1,33 @@
+package com.example.ToikanaService.controller;
+
+import com.example.ToikanaService.dto.user.request.UserAuthRequest;
+import com.example.ToikanaService.dto.user.request.UserRequest;
+import com.example.ToikanaService.dto.user.response.UserResponse;
+import com.example.ToikanaService.service.UserService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.experimental.FieldDefaults;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/users")
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserController {
+    final UserService userService;
+
+    @PostMapping("/register")
+    public UserResponse register(@RequestBody UserRequest request) {
+        return userService.save(request);
+    }
+
+    @SneakyThrows
+    @PostMapping("/auto")
+    public String auto(@RequestBody UserAuthRequest request) {
+        return userService.getToken(request);
+    }
+}
