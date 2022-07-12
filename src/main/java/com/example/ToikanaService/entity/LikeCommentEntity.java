@@ -1,0 +1,25 @@
+package com.example.ToikanaService.entity;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "like_comments")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class LikeCommentEntity extends BaseEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    UserEntity userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    CommentEntity commentEntity;
+}
