@@ -1,24 +1,24 @@
 package com.example.ToikanaService.entity;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "user_roles")
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CommentEntity extends BaseEntity {
-
-    @ManyToOne
-    @JoinColumn(name = "post_id",nullable = false)
-    PostEntity post;
-
+public class UserRoleEntity extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    RoleEntity role;
 }

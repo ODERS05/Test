@@ -5,6 +5,7 @@ import com.example.ToikanaService.dto.user.request.UserRequest;
 import com.example.ToikanaService.dto.user.response.UserResponse;
 import com.example.ToikanaService.entity.UserEntity;
 import com.example.ToikanaService.exception.UserSignInException;
+import com.example.ToikanaService.mapper.UserMapper;
 import com.example.ToikanaService.repository.UserRepository;
 import com.example.ToikanaService.service.UserService;
 import lombok.AccessLevel;
@@ -35,11 +36,7 @@ public class UserServiceImpl implements UserService {
                         .isActive(true)
                         .build());
 
-        return UserResponse.builder()
-                .email(userEntity.getEmail())
-                .id(userEntity.getId())
-                .login(userEntity.getLogin())
-                .build();
+        return UserMapper.INSTANCE.toUserResponse(userEntity);
     }
     @Override
     public String getToken(UserAuthRequest request) throws UserSignInException {
@@ -54,17 +51,11 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<UserResponse> getAll() {
-        return null;
+        return UserMapper.INSTANCE.toUsersResponse(userRepository.findAll());
     }
 
     @Override
     public UserResponse findById(Long id) {
-        return null;
+        return UserMapper.INSTANCE.toUserResponse(userRepository.getById(id));
     }
-
-    @Override
-    public UserResponse delete(Long id) {
-        return null;
-    }
-
 }

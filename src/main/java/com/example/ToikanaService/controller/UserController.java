@@ -8,15 +8,13 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@CrossOrigin(origins = "*", maxAge = 8600)
 public class UserController {
     final UserService userService;
 
