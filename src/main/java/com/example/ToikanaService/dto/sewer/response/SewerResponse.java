@@ -1,4 +1,4 @@
-package com.example.ToikanaService.dto.post.response;
+package com.example.ToikanaService.dto.sewer.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,10 +8,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PostResponse {
+public class SewerResponse {
     Long id;
-
-    String header;
-
-    Long userId;
+    Long user_id;
+    Long order_id;
+    String status;
 }

@@ -10,6 +10,8 @@ import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
@@ -27,5 +29,10 @@ public class UserController {
     @PostMapping("/auto")
     public String auto(@RequestBody UserAuthRequest request) {
         return userService.getToken(request);
+    }
+
+    @GetMapping
+    public List<UserResponse> getAll(){
+        return userService.getAll();
     }
 }
