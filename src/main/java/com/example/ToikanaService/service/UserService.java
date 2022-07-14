@@ -8,4 +8,5 @@ import com.example.ToikanaService.exception.UserSignInException;
 
 public interface UserService extends BaseService<UserResponse, UserRequest> {
     String getToken(UserAuthRequest request) throws UserSignInException;
+    Boolean updateUser(UserRequest t);
 }

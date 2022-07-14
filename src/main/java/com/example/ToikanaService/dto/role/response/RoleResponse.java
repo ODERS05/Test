@@ -1,19 +1,14 @@
-package com.example.ToikanaService.dto.user.response;
-
+package com.example.ToikanaService.dto.role.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserResponse {
+public class RoleResponse {
     Long id;
 
-    String login;
-
-    String email;
+    String name;
 }

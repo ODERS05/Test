@@ -1,6 +1,5 @@
 package com.example.ToikanaService.entity;
 
-import com.example.ToikanaService.enums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -8,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "seamstress")
+@Table(name = "sewer")
 @Getter
 @Setter
 @Builder
@@ -28,8 +27,7 @@ public class SewerEntity extends BaseEntity {
     OrderEntity order;
 
     @Column(name = "status", nullable = false, unique = true)
-    @Enumerated(value = EnumType.STRING)
-    Status status;
+    String status;
 
     //Дата обновления статуса с NEw на DONE
     @Column(name = "cts", nullable = false, unique = true)

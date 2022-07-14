@@ -7,22 +7,21 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order")
-@Getter
+@Table(name = "orders")
 @Setter
-@Builder
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderEntity extends BaseEntity{
-
-    @Column(name = "clothes_type", nullable = false, unique = true)
+    @Column(name = "clothes_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
     ClothesType clothesType;
 
-    @Column(name = "amount", nullable = false, unique = true)
+    @Column(name = "amount", nullable = false)
     Long amount;
 
-    @Column(name = "unit_price", nullable = false, unique = true)
+    @Column(name = "unit_price", nullable = false)
     Integer unitPrice;
 }

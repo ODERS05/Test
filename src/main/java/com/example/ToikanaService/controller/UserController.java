@@ -35,4 +35,8 @@ public class UserController {
     public List<UserResponse> getAll(){
         return userService.getAll();
     }
+    @PutMapping("/update")
+    public Boolean update(@RequestBody UserRequest request){
+        return userService.updateUser(request);
+    }
 }

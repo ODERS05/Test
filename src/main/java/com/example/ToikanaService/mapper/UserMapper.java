@@ -12,13 +12,14 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
     UserResponse toUserResponse(UserEntity user);
 
     List<UserResponse> toUsersResponse(List<UserEntity> users);
 
     UserAuthRequest toUserAuth(UserEntity user);
 
-    UserEntity toUserEntity(UserResponse userResponse);
+    UserEntity toUserEntity(UserRequest userRequest);
 
     default void test(UserRequest userRequest){
 
