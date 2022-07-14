@@ -52,7 +52,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "users/register").permitAll()
                 .antMatchers(HttpMethod.POST, "users/auto").permitAll()
                 .antMatchers(HttpMethod.PUT, "users/update").permitAll()
-                .antMatchers(HttpMethod.POST, "floor/add-floor").hasRole("ROLE_Admin")
+                .antMatchers(HttpMethod.POST, "floor/add-floor").hasRole("Admin")
                 .and()
                 .httpBasic();
     }
