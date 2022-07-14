@@ -14,6 +14,6 @@ import javax.persistence.*;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoleEntity extends BaseEntity{
-    @Column(name = "name_role", nullable = false, unique = true)
+    @Column(name = "name_role", nullable = false)
     String nameRole;
 }

@@ -1,5 +1,6 @@
 package com.example.ToikanaService.dto.floor.response;
 
+import com.example.ToikanaService.dto.user.response.UserResponse;
 import com.example.ToikanaService.entity.UserEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,9 +13,7 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FloorResponse {
-    Long id;
-
-    List<UserEntity> userEntities;
+    List<UserResponse> users;
 
     String floorName;
 }
