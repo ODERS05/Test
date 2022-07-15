@@ -13,6 +13,8 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FloorResponse {
+    Long id;
+
     List<UserResponse> users;
 
     String floorName;
