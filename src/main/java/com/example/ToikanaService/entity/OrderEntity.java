@@ -1,6 +1,5 @@
 package com.example.ToikanaService.entity;
 
-import com.example.ToikanaService.enums.ClothesType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -16,8 +15,7 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderEntity extends BaseEntity{
     @Column(name = "clothes_type", nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    ClothesType clothesType;
+    String clothesType;
 
     @Column(name = "amount", nullable = false)
     Long amount;

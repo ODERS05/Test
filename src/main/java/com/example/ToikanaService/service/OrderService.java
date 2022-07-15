@@ -1,4 +1,7 @@
 package com.example.ToikanaService.service;
 
-public interface OrderService{
+import com.example.ToikanaService.dto.order.request.OrderRequest;
+import com.example.ToikanaService.dto.order.response.OrderResponse;
+
+public interface OrderService extends BaseService<OrderResponse, OrderRequest> {
 }
