@@ -2,6 +2,7 @@ package com.example.ToikanaService.controller;
 
 import com.example.ToikanaService.dto.user.request.UserAuthRequest;
 import com.example.ToikanaService.dto.user.request.UserRequest;
+import com.example.ToikanaService.dto.user.request.UserUpdateRequest;
 import com.example.ToikanaService.dto.user.response.UserResponse;
 import com.example.ToikanaService.service.UserService;
 import lombok.AccessLevel;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @SneakyThrows
-    @PostMapping("/auto")
+    @PostMapping("/auth")
     public String auto(@RequestBody UserAuthRequest request) {
         return userService.getToken(request);
     }
@@ -35,12 +36,15 @@ public class UserController {
     public List<UserResponse> getAll(){
         return userService.getAll();
     }
+
     @GetMapping("/{id}")
     public UserResponse findById(@PathVariable Long id) {
         return userService.findById(id);
     }
-    @PutMapping("/update")
-    public Boolean update(@RequestBody UserRequest request){
+
+    @PutMapping("/{id}")
+    public Boolean update(@RequestBody UserUpdateRequest request, @PathVariable Long id){
+        request.setId(id);
         return userService.updateUser(request);
     }
 }

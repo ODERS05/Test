@@ -2,6 +2,7 @@ package com.example.ToikanaService.service.impl;
 
 import com.example.ToikanaService.dto.user.request.UserAuthRequest;
 import com.example.ToikanaService.dto.user.request.UserRequest;
+import com.example.ToikanaService.dto.user.request.UserUpdateRequest;
 import com.example.ToikanaService.dto.user.response.UserResponse;
 import com.example.ToikanaService.entity.UserEntity;
 import com.example.ToikanaService.entity.UserRoleEntity;
@@ -71,14 +72,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean updateUser(UserRequest t) {
+    public Boolean updateUser(UserUpdateRequest t) {
+        UserEntity user = userRepository.getById(t.getId());
         if(t == null){
             throw new UserNotFoundException("Такого пользователя нет", HttpStatus.NOT_FOUND);
         }
-        UserEntity user = UserMapper.INSTANCE.toUserEntity(t);
         user.setEmail(t.getEmail());
         user.setPassword(t.getPassword());
         user.setLogin(t.getLogin());
+        userRepository.save(user);
         return user.getId() != null ;
     }
 
