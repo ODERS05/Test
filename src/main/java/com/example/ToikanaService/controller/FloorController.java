@@ -26,4 +26,8 @@ public class FloorController {
     public List<FloorResponse> getAll(){
         return floorService.getAll();
     }
+    @GetMapping("/{id}")
+    public FloorResponse findById(@PathVariable Long id) {
+        return floorService.findById(id);
+    }
 }

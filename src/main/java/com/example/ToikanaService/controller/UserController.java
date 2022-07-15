@@ -35,6 +35,10 @@ public class UserController {
     public List<UserResponse> getAll(){
         return userService.getAll();
     }
+    @GetMapping("/{id}")
+    public UserResponse findById(@PathVariable Long id) {
+        return userService.findById(id);
+    }
     @PutMapping("/update")
     public Boolean update(@RequestBody UserRequest request){
         return userService.updateUser(request);
