@@ -10,6 +10,7 @@ import com.example.ToikanaService.exception.NotUniqueRecord;
 import com.example.ToikanaService.exception.UserNotFoundException;
 import com.example.ToikanaService.exception.UserSignInException;
 import com.example.ToikanaService.mapper.UserMapper;
+import com.example.ToikanaService.model.AuthorizationModel;
 import com.example.ToikanaService.repository.RoleRepository;
 import com.example.ToikanaService.repository.UserRepository;
 import com.example.ToikanaService.repository.UserRoleRepository;
@@ -23,9 +24,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 import java.util.List;
-    @Service
-    @FieldDefaults(level = AccessLevel.PRIVATE)
-    @AllArgsConstructor
+
+@Service
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     final UserRepository userRepository;
@@ -35,6 +37,7 @@ public class UserServiceImpl implements UserService {
     final RoleRepository roleRepository;
 
     final UserRoleRepository userRoleRepository;
+
     @Override
     public UserResponse save(UserRequest t) {
         try {
@@ -59,26 +62,30 @@ public class UserServiceImpl implements UserService {
             throw new NotUniqueRecord("Не уникальный логин", HttpStatus.BAD_REQUEST);
         }
     }
+
     @Override
-    public String getToken(UserAuthRequest request) throws UserSignInException {
+    public AuthorizationModel getToken(UserAuthRequest request) throws UserSignInException {
         UserEntity userEntity = userRepository.findByLoginOrEmail(request.getEmail());
         boolean isMatches = passwordEncoder.matches(request.getPassword(), userEntity.getPassword());
         if (isMatches) {
-            return "Basic " + new String(Base64.getEncoder()
-                    .encode((userEntity.getLogin() + ":" + request.getPassword()).getBytes()));
+            return AuthorizationModel.builder().token("Basic " + new String(Base64.getEncoder()
+                    .encode((userEntity.getLogin() + ":" + request.getPassword()).getBytes())))
+                    .id(userEntity.getId())
+                    .build();
         } else {
             throw new UserSignInException("Неправильный логин или пароль!", HttpStatus.NOT_FOUND);
         }
     }
 
+
     @Override
     public Boolean updateUser(UserUpdateRequest t) {
         UserEntity user = userRepository.getById(t.getId());
         user.setEmail(t.getEmail());
-        user.setPassword(t.getPassword());
+        user.setPassword(passwordEncoder.encode(t.getPassword()));
         user.setLogin(t.getLogin());
         userRepository.save(user);
-        return user.getId() != null ;
+        return user.getId() != null;
     }
 
     @Override

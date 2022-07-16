@@ -23,6 +23,6 @@ public class FloorEntity extends BaseEntity {
     List<SewerEntity> sewerEntities;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id")
     OrderEntity order;
 }

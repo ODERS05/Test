@@ -1,6 +1,7 @@
 package com.example.ToikanaService.service.impl;
 
 import com.example.ToikanaService.dto.floor.request.FloorRequest;
+import com.example.ToikanaService.dto.floor.request.FloorUpdateRequest;
 import com.example.ToikanaService.dto.floor.response.FloorResponse;
 import com.example.ToikanaService.dto.sewer.response.SewerResponse;
 import com.example.ToikanaService.entity.FloorEntity;
@@ -106,5 +107,17 @@ public class FloorServiceImpl implements FloorService {
                 .unitPrice(floor.getOrder().getUnitPrice())
                 .amount(floor.getOrder().getAmount())
                 .build();
+    }
+
+    @Override
+    public Boolean updateFloor(FloorUpdateRequest t) {
+        FloorEntity floor = floorRepository.getById(t.getId());
+        OrderEntity order = orderRepository.findById(t.getOrderId()).orElseThrow(() -> new OrderNotFoundException("Такого заказа нет", HttpStatus.BAD_REQUEST));
+        floor.setOrder(OrderEntity.builder()
+                .unitPrice(order.getUnitPrice())
+                .amount(order.getAmount())
+                .clothesType(order.getClothesType())
+                .build());
+        return floor.getId() != null;
     }
 }

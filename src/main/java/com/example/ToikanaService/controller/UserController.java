@@ -4,6 +4,7 @@ import com.example.ToikanaService.dto.user.request.UserAuthRequest;
 import com.example.ToikanaService.dto.user.request.UserRequest;
 import com.example.ToikanaService.dto.user.request.UserUpdateRequest;
 import com.example.ToikanaService.dto.user.response.UserResponse;
+import com.example.ToikanaService.model.AuthorizationModel;
 import com.example.ToikanaService.service.UserService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class UserController {
 
     @SneakyThrows
     @PostMapping("/auth")
-    public String auto(@RequestBody UserAuthRequest request) {
+    public AuthorizationModel auto(@RequestBody UserAuthRequest request) {
         return userService.getToken(request);
     }
 

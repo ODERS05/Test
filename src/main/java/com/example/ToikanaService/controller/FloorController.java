@@ -1,6 +1,7 @@
 package com.example.ToikanaService.controller;
 
 import com.example.ToikanaService.dto.floor.request.FloorRequest;
+import com.example.ToikanaService.dto.floor.request.FloorUpdateRequest;
 import com.example.ToikanaService.dto.floor.response.FloorResponse;
 import com.example.ToikanaService.service.FloorService;
 import lombok.AccessLevel;
@@ -30,4 +31,10 @@ public class FloorController {
     public FloorResponse findById(@PathVariable Long id) {
         return floorService.findById(id);
     }
+
+    @PutMapping("/{id}")
+    public Boolean updateFloor(@RequestBody FloorUpdateRequest request, @PathVariable Long id){
+        request.setId(id);
+        return floorService.updateFloor(request);
+    };
 }

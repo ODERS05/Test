@@ -1,4 +1,4 @@
-package com.example.ToikanaService.dto.user.request;
+package com.example.ToikanaService.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,9 +8,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserAuthRequest {
-    String Email;
-
-    String password;
+public class AuthorizationModel {
+    String token;
+    Long id;
 }
-

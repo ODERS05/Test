@@ -19,11 +19,11 @@ public class SewerEntity extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     UserEntity user;
 
-    @Column(name = "done_amount", nullable = false)
+    @Column(name = "done_amount")
     Long doneAmount;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id")
     OrderEntity order;
 
     @Column(name = "status", nullable = false, unique = true)
