@@ -10,6 +10,7 @@ import com.example.ToikanaService.entity.SewerEntity;
 import com.example.ToikanaService.entity.UserEntity;
 import com.example.ToikanaService.exception.OrderNotFoundException;
 import com.example.ToikanaService.exception.UserNotFoundException;
+import com.example.ToikanaService.mapper.SewerMapper;
 import com.example.ToikanaService.repository.OrderRepository;
 import com.example.ToikanaService.repository.SewerRepository;
 import com.example.ToikanaService.repository.UserRepository;
@@ -89,7 +90,8 @@ public class SewerServiceImpl implements SewerService {
 
     @Override
     public SewerResponse findById(Long id) {
-        return null;
+        return SewerMapper.INSTANCE.toSewerResponse(sewerRepository.getById(id));
+
     }
 
     @Override

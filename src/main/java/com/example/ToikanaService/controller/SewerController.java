@@ -32,4 +32,8 @@ public class SewerController {
         request.setId(id);
         return sewerService.updateSewer(request);
     };
+    @GetMapping("/{id}")
+    public SewerResponse findById(@PathVariable Long id){
+        return sewerService.findById(id);
+    };
 }
