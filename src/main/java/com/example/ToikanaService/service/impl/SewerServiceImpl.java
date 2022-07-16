@@ -84,7 +84,6 @@ public class SewerServiceImpl implements SewerService {
                     .email(sewerEntity.getUser().getEmail())
                     .build());
         }
-
         return sewerResponses;
     }
 
@@ -116,8 +115,9 @@ public class SewerServiceImpl implements SewerService {
     }
 
     @Override
-    public BigDecimal countSewerSalary(SewerRequest t){
-        SewerEntity sewerEntity;
-        return null;
+    public BigDecimal countSewerSalary(Long id){
+        SewerEntity sewerEntity = sewerRepository.getById(id);
+        BigDecimal salary = BigDecimal.valueOf(sewerEntity.getDoneAmount() * sewerEntity.getOrder().getUnitPrice());
+        return salary;
     }
 }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -36,4 +37,9 @@ public class SewerController {
     public SewerResponse findById(@PathVariable Long id){
         return sewerService.findById(id);
     };
+
+    @GetMapping("count-salary/{id}")
+    public BigDecimal countSewerSalary(@PathVariable Long id){
+        return sewerService.countSewerSalary(id);
+    }
 }
