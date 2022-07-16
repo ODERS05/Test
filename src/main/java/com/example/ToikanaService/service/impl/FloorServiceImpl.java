@@ -51,7 +51,7 @@ public class FloorServiceImpl implements FloorService {
                     .floorName(t.getFloorName())
                     .build();
         }catch (Exception ignored){
-            throw  new NotUniqueFloor("Одинноковое название этажей", HttpStatus.BAD_REQUEST);
+            throw  new NotUniqueFloor("Одиннаковое название этажей", HttpStatus.BAD_REQUEST);
         }
     }
 

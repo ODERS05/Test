@@ -11,6 +11,8 @@ import lombok.experimental.FieldDefaults;
 public class OrderResponse {
     Long id;
 
+    String clothType;
+
     Long amount;
 
     Integer unitPrice;

@@ -15,13 +15,13 @@ public class ApplicationStartRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        roleRepository.save(
-                RoleEntity.builder()
-                .nameRole("ROLE_ADMIN").build());
-        roleRepository.save(
-                RoleEntity.builder()
-                        .nameRole("ROLE_USER")
-                        .build()
-        );
+//        roleRepository.save(
+//                RoleEntity.builder()
+//                .nameRole("ROLE_ADMIN").build());
+//        roleRepository.save(
+//                RoleEntity.builder()
+//                        .nameRole("ROLE_USER")
+//                        .build()
+//        );
     }
 }

@@ -17,9 +17,9 @@ import java.time.LocalDateTime;
 public class SewerEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    UserEntity executorSewer;
+    UserEntity user;
 
-    @Column(name = "amount", nullable = false, unique = true)
+    @Column(name = "done_amount", nullable = false)
     Long doneAmount;
 
     @ManyToOne

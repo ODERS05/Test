@@ -3,6 +3,8 @@ package com.example.ToikanaService.dto.sewer.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,7 +12,18 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SewerResponse {
     Long id;
-    Long user_id;
-    Long order_id;
+
+    String login;
+
+    Long doneAmount;
+
+    String clothType;
+
+    Long amount;
+
+    Integer unitPrice;
+
     String status;
+
+    LocalDateTime ctsWhenDone;
 }

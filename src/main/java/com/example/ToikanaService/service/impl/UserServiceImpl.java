@@ -23,9 +23,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 import java.util.List;
-@Service
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
+    @Service
+    @FieldDefaults(level = AccessLevel.PRIVATE)
+    @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     final UserRepository userRepository;
@@ -74,9 +74,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean updateUser(UserUpdateRequest t) {
         UserEntity user = userRepository.getById(t.getId());
-        if(t == null){
-            throw new UserNotFoundException("Такого пользователя нет", HttpStatus.NOT_FOUND);
-        }
         user.setEmail(t.getEmail());
         user.setPassword(t.getPassword());
         user.setLogin(t.getLogin());
