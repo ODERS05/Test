@@ -26,10 +26,10 @@ public class SewerEntity extends BaseEntity {
     @JoinColumn(name = "order_id")
     OrderEntity order;
 
-    @Column(name = "status", nullable = false, unique = true)
+    @Column(name = "status", nullable = false)
     String status;
 
     //Дата обновления статуса с NEw на DONE
-    @Column(name = "cts", nullable = false, unique = true)
+    @Column(name = "cts", nullable = false)
     LocalDateTime ctsWhenDone;
 }
