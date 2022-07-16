@@ -8,5 +8,5 @@ import java.math.BigDecimal;
 
 public interface SewerService extends BaseService<SewerResponse, SewerRequest> {
     Boolean updateSewer(SewerUpdateRequest t);
-    BigDecimal countSewerSalary();
+    BigDecimal countSewerSalary(SewerRequest t);
 }

@@ -105,7 +105,8 @@ public class SewerServiceImpl implements SewerService {
     }
 
     @Override
-    public BigDecimal countSewerSalary() {
+    public BigDecimal countSewerSalary(SewerRequest t){
+        SewerEntity sewerEntity;
         return null;
     }
 }
