@@ -51,8 +51,16 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "users/register").permitAll()
                 .antMatchers(HttpMethod.POST, "users/auto").permitAll()
-                .antMatchers(HttpMethod.PUT, "users/update").permitAll()
-                .antMatchers(HttpMethod.POST, "floor/add-floor").hasRole("Admin")
+                .antMatchers(HttpMethod.PUT, "users/{id}").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET,"users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "floor").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "floor/add-floor").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "order/add-order").hasAnyRole("CUSTOMER","ADMIN")
+                .antMatchers(HttpMethod.GET, "order").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "sewer/add-sewer").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "sewer/{id}").hasAnyRole("USER","ADMIN")
+                .antMatchers(HttpMethod.GET, "sewer").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"count-salary/{id}").hasRole("ADMIN")
                 .and()
                 .httpBasic();
     }
