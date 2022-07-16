@@ -90,7 +90,18 @@ public class SewerServiceImpl implements SewerService {
 
     @Override
     public SewerResponse findById(Long id) {
-        return SewerMapper.INSTANCE.toSewerResponse(sewerRepository.getById(id));
+        SewerEntity sewer = sewerRepository.getById(id);
+        return SewerResponse.builder()
+                .id(sewer.getId())
+                .status(sewer.getStatus())
+                .doneAmount(sewer.getDoneAmount())
+                .login(sewer.getUser().getLogin())
+                .clothType(sewer.getOrder().getClothesType())
+                .amount(sewer.getOrder().getAmount())
+                .unitPrice(sewer.getOrder().getUnitPrice())
+                .ctsWhenDone(LocalDateTime.now())
+                .email(sewer.getUser().getEmail())
+                .build();
 
     }
 

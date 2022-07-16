@@ -46,6 +46,7 @@ public class FloorServiceImpl implements FloorService {
             floor.setSewerEntities(sewerEntities);
             floorRepository.save(floor);
             return FloorResponse.builder()
+                    .id(floor.getId())
                     .sewers(sewerResponses)
                     .floorName(t.getFloorName())
                     .build();
@@ -64,12 +65,31 @@ public class FloorServiceImpl implements FloorService {
                     .floorName(floor.getFloorName())
                     .id(floor.getId())
                     .build());
-        }
-        return floorResponses;
+        }return floorResponses;
     }
 
     @Override
     public FloorResponse findById(Long id) {
-        return FloorMapper.INSTANCE.toFloorResponse(floorRepository.getById(id));
+        FloorEntity floor = floorRepository.getById(id);
+        List<SewerEntity> sewerEntities = sewerRepository.findAll();
+        List<SewerResponse> sewerResponses = new ArrayList<>();
+        for (SewerEntity sewerEntity : sewerEntities) {
+            sewerResponses.add(SewerResponse.builder()
+                    .status(sewerEntity.getStatus())
+                    .ctsWhenDone(sewerEntity.getCtsWhenDone())
+                    .doneAmount(sewerEntity.getDoneAmount())
+                    .clothType(sewerEntity.getOrder().getClothesType())
+                    .login(sewerEntity.getUser().getLogin())
+                    .unitPrice(sewerEntity.getOrder().getUnitPrice())
+                    .id(sewerEntity.getId())
+                    .amount(sewerEntity.getOrder().getAmount())
+                    .email(sewerEntity.getUser().getEmail())
+                    .build());
+        }
+        return FloorResponse.builder()
+                .id(floor.getId())
+                .sewers(sewerResponses)
+                .floorName(floor.getFloorName())
+                .build();
     }
 }
