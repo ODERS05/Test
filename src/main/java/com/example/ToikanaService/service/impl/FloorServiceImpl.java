@@ -28,6 +28,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FloorServiceImpl implements FloorService {
     final FloorRepository floorRepository;
+    final SewerService sewerService;
     ModelMapper modelMapper;
     final SewerRepository sewerRepository;
     @Override
@@ -55,28 +56,13 @@ public class FloorServiceImpl implements FloorService {
 
     @Override
     public List<FloorResponse> getAll() {
-        List<SewerEntity> sewerEntities = sewerRepository.findAll();
-        List<SewerResponse> sewerResponses = new ArrayList<>();
-        for (SewerEntity sewerEntity : sewerEntities) {
-            sewerResponses.add(SewerResponse.builder()
-                    .status(sewerEntity.getStatus())
-                    .ctsWhenDone(sewerEntity.getCtsWhenDone())
-                    .doneAmount(sewerEntity.getDoneAmount())
-                    .clothType(sewerEntity.getOrder().getClothesType())
-                    .login(sewerEntity.getUser().getLogin())
-                    .unitPrice(sewerEntity.getOrder().getUnitPrice())
-                    .id(sewerEntity.getId())
-                    .amount(sewerEntity.getOrder().getAmount())
-                    .email(sewerEntity.getUser().getEmail())
-                    .build());
-        }
         List<FloorEntity> floorEntities = floorRepository.findAll();
         List<FloorResponse> floorResponses = new ArrayList<>();
         for (FloorEntity floor: floorEntities) {
             floorResponses.add(FloorResponse.builder()
-                    .sewers(sewerResponses)
+                    .sewers(sewerService.getAll())
                     .floorName(floor.getFloorName())
-                            .id(floor.getId())
+                    .id(floor.getId())
                     .build());
         }
         return floorResponses;
