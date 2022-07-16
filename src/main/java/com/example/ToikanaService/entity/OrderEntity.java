@@ -22,4 +22,5 @@ public class OrderEntity extends BaseEntity{
 
     @Column(name = "unit_price", nullable = false)
     Integer unitPrice;
+
 }
