@@ -4,10 +4,13 @@ import com.example.ToikanaService.dto.floor.request.FloorRequest;
 import com.example.ToikanaService.dto.floor.response.FloorResponse;
 import com.example.ToikanaService.dto.sewer.response.SewerResponse;
 import com.example.ToikanaService.entity.FloorEntity;
+import com.example.ToikanaService.entity.OrderEntity;
 import com.example.ToikanaService.entity.SewerEntity;
 import com.example.ToikanaService.exception.NotUniqueFloor;
+import com.example.ToikanaService.exception.OrderNotFoundException;
 import com.example.ToikanaService.mapper.FloorMapper;
 import com.example.ToikanaService.repository.FloorRepository;
+import com.example.ToikanaService.repository.OrderRepository;
 import com.example.ToikanaService.repository.SewerRepository;
 import com.example.ToikanaService.service.FloorService;
 import com.example.ToikanaService.service.SewerService;
@@ -31,11 +34,14 @@ public class FloorServiceImpl implements FloorService {
     final SewerService sewerService;
     ModelMapper modelMapper;
     final SewerRepository sewerRepository;
+    final OrderRepository orderRepository;
     @Override
     public FloorResponse save(FloorRequest t) {
         try {
+            OrderEntity order = orderRepository.findById(t.getOrderId()).orElseThrow(() -> new OrderNotFoundException("Такого заказа нет", HttpStatus.BAD_REQUEST));
             FloorEntity floor = floorRepository.save(FloorEntity.builder()
                     .floorName(t.getFloorName())
+                    .order(order)
                     .build());
             List<SewerEntity> sewerEntities = new ArrayList<>();
             for (int i = 0; i < t.getSewerId().size(); i++) {
@@ -49,6 +55,9 @@ public class FloorServiceImpl implements FloorService {
                     .id(floor.getId())
                     .sewers(sewerResponses)
                     .floorName(t.getFloorName())
+                    .clothType(order.getClothesType())
+                    .unitPrice(order.getUnitPrice())
+                    .amount(order.getAmount())
                     .build();
         }catch (Exception ignored){
             throw  new NotUniqueFloor("Одиннаковое название этажей", HttpStatus.BAD_REQUEST);
@@ -64,6 +73,9 @@ public class FloorServiceImpl implements FloorService {
                     .sewers(sewerService.getAll())
                     .floorName(floor.getFloorName())
                     .id(floor.getId())
+                    .amount(floor.getOrder().getAmount())
+                    .unitPrice(floor.getOrder().getUnitPrice())
+                    .clothType(floor.getOrder().getClothesType())
                     .build());
         }return floorResponses;
     }
@@ -90,6 +102,9 @@ public class FloorServiceImpl implements FloorService {
                 .id(floor.getId())
                 .sewers(sewerResponses)
                 .floorName(floor.getFloorName())
+                .clothType(floor.getOrder().getClothesType())
+                .unitPrice(floor.getOrder().getUnitPrice())
+                .amount(floor.getOrder().getAmount())
                 .build();
     }
 }

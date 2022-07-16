@@ -12,6 +12,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FloorRequest {
     List<Long> sewerId;
-
+    Long orderId;
     String floorName;
 }

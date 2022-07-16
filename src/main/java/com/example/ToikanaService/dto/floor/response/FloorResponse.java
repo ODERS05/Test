@@ -18,5 +18,11 @@ public class FloorResponse {
 
     List<SewerResponse> sewers;
 
+    String clothType;
+
+    Long amount;
+
+    Integer unitPrice;
+
     String floorName;
 }

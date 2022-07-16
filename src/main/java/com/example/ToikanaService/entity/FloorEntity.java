@@ -21,4 +21,8 @@ public class FloorEntity extends BaseEntity {
     @ManyToMany
     @JoinColumn(name = "sewer_id", nullable = false)
     List<SewerEntity> sewerEntities;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    OrderEntity order;
 }
