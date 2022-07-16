@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FloorRequest {
-    List<Long> userId;
+    List<Long> sewerId;
 
     String floorName;
 }

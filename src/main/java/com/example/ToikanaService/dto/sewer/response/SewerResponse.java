@@ -15,6 +15,8 @@ public class SewerResponse {
 
     String login;
 
+    String email;
+
     Long doneAmount;
 
     String clothType;

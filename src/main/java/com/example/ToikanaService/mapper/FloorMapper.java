@@ -16,7 +16,7 @@ public interface FloorMapper {
 
     FloorEntity toFloorEntity(FloorRequest floorRequest);
     @Mappings(value = {
-            @Mapping(source = "userEntities", target = "users")
+            @Mapping(source = "sewerEntities", target = "sewers")
     })
     FloorResponse toFloorResponse(FloorEntity floor);
     List<FloorResponse> toFloorsResponse(List<FloorEntity> entities);

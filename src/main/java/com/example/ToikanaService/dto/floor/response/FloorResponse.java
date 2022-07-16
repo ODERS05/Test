@@ -1,5 +1,6 @@
 package com.example.ToikanaService.dto.floor.response;
 
+import com.example.ToikanaService.dto.sewer.response.SewerResponse;
 import com.example.ToikanaService.dto.user.response.UserResponse;
 import com.example.ToikanaService.entity.UserEntity;
 import lombok.*;
@@ -15,7 +16,7 @@ import java.util.List;
 public class FloorResponse {
     Long id;
 
-    List<UserResponse> users;
+    List<SewerResponse> sewers;
 
     String floorName;
 }

@@ -20,6 +20,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class SewerServiceImpl implements SewerService {
                 .unitPrice(order.getUnitPrice()).build();
         UserResponse userResponse = UserResponse.builder()
                 .login(user.getLogin())
+                .email(user.getEmail())
                 .build();
         return SewerResponse.builder()
                 .id(sewer.getId())
@@ -58,7 +60,9 @@ public class SewerServiceImpl implements SewerService {
                 .clothType(orderResponse.getClothType())
                 .amount(orderResponse.getAmount())
                 .unitPrice(orderResponse.getUnitPrice())
-                .ctsWhenDone(LocalDateTime.now()).build();
+                .ctsWhenDone(LocalDateTime.now())
+                .email(userResponse.getEmail())
+                .build();
     }
 
     @Override
@@ -76,6 +80,7 @@ public class SewerServiceImpl implements SewerService {
                     .unitPrice(sewerEntity.getOrder().getUnitPrice())
                     .id(sewerEntity.getId())
                     .amount(sewerEntity.getOrder().getAmount())
+                    .email(sewerEntity.getUser().getEmail())
                     .build());
         }
 
@@ -95,5 +100,10 @@ public class SewerServiceImpl implements SewerService {
         sewer.setCtsWhenDone(t.getCtsWhenDone());
         sewerRepository.save(sewer);
         return sewer.getId() != null;
+    }
+
+    @Override
+    public BigDecimal countSewerSalary() {
+        return null;
     }
 }

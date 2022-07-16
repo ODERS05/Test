@@ -19,6 +19,6 @@ public class FloorEntity extends BaseEntity {
     String floorName;
 
     @ManyToMany
-    @JoinColumn(name = "user_id", nullable = false)
-    List<UserEntity> userEntities;
+    @JoinColumn(name = "sewer_id", nullable = false)
+    List<SewerEntity> sewerEntities;
 }

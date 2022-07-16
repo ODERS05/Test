@@ -2,16 +2,14 @@ package com.example.ToikanaService.service.impl;
 
 import com.example.ToikanaService.dto.floor.request.FloorRequest;
 import com.example.ToikanaService.dto.floor.response.FloorResponse;
-import com.example.ToikanaService.dto.user.response.UserResponse;
+import com.example.ToikanaService.dto.sewer.response.SewerResponse;
 import com.example.ToikanaService.entity.FloorEntity;
-import com.example.ToikanaService.entity.UserEntity;
+import com.example.ToikanaService.entity.SewerEntity;
 import com.example.ToikanaService.exception.NotUniqueFloor;
 import com.example.ToikanaService.mapper.FloorMapper;
 import com.example.ToikanaService.repository.FloorRepository;
-import com.example.ToikanaService.repository.OrderRepository;
-import com.example.ToikanaService.repository.UserRepository;
+import com.example.ToikanaService.repository.SewerRepository;
 import com.example.ToikanaService.service.FloorService;
-import com.example.ToikanaService.service.UserService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -29,25 +27,24 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FloorServiceImpl implements FloorService {
     final FloorRepository floorRepository;
-    final UserRepository userRepository;
     ModelMapper modelMapper;
-    final UserService userService;
+    final SewerRepository sewerRepository;
     @Override
     public FloorResponse save(FloorRequest t) {
         try {
             FloorEntity floor = floorRepository.save(FloorEntity.builder()
                     .floorName(t.getFloorName())
                     .build());
-            List<UserEntity> userEntities = new ArrayList<>();
-            for (int i = 0; i < t.getUserId().size(); i++) {
-                userEntities.add(userRepository.findById(t.getUserId().get(i)).get());
+            List<SewerEntity> sewerEntities = new ArrayList<>();
+            for (int i = 0; i < t.getSewerId().size(); i++) {
+                sewerEntities.add(sewerRepository.findById(t.getSewerId().get(i)).get());
             }
-            Type listType = new TypeToken<List<UserResponse>>(){}.getType();
-            List<UserResponse> userResponsesList = modelMapper.map(userEntities,listType);
-            floor.setUserEntities(userEntities);
+            Type listType = new TypeToken<List<SewerResponse>>(){}.getType();
+            List<SewerResponse> sewerResponses = modelMapper.map(sewerEntities,listType);
+            floor.setSewerEntities(sewerEntities);
             floorRepository.save(floor);
             return FloorResponse.builder()
-                    .users(userResponsesList)
+                    .sewers(sewerResponses)
                     .floorName(t.getFloorName())
                     .build();
         }catch (Exception ignored){
